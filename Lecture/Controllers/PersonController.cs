@@ -61,13 +61,12 @@ namespace Lecture.Controllers
         // GET: Person/Edit/5
         public PartialViewResult Edit(int id)
         {
-            TempData["success2"] = 0;
             return PartialView( _storage.Get(id));
         }
 
         // POST: Person/Edit/5
         [HttpPost]
-        public Object Edit(int id, Person p)
+        public ActionResult Edit(int id, Person p)
         {
             try
             {
@@ -77,10 +76,8 @@ namespace Lecture.Controllers
                 }
                 else
                 {
-                    TempData["success2"] = 0;
                     return PartialView("Edit", p);
                 }
-                TempData["success2"] = 1;
                 return Json(new { redirectTo = Url.Action("Index") });
 
             }
