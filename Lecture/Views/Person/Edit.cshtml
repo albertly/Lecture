@@ -4,20 +4,14 @@
 <div id="validationSummary">
 
 
-
-
     @using (Ajax.BeginForm(new AjaxOptions
     {
         UpdateTargetId = "validationSummary",
         InsertionMode = InsertionMode.Replace,
-        OnSuccess = "handleSuccess",
-        OnComplete = "onComplete",
-        OnBegin = "OnBegin"
+        OnSuccess = "handleSuccess"
 
     }))
     {
-         <input type="text" value="@TempData["success2"]" id="success" />
-
             @Html.AntiForgeryToken()
 
             <div class="form-horizontal">
@@ -76,18 +70,7 @@
         }
 
     <script>
-        var OnBegin = function () {
-            return;
-            alert("Beg");
-            if ($('#success').val == "1") {
-                $('#validationSummary').attr('id', 'tmpID');
-                alert("Beg 1");
-                $('#mainDiv').attr('id', 'validationSummary');
-                $('#myModal').modal('hide');
-            }
-            alert("Beg E");
 
-        }
         function handleSuccess(result) {
             if (result.redirectTo) {
                 // The controller action returned a JSON object with the redirectTo property
@@ -99,16 +82,6 @@
                 $('#validationSummary').html(result);
             }
         }
-        var onComplete = function () {
-            return;
-            alert("C ");
-            if ($('#success').val == "1") {
-                alert("C 1");
-                $('#validationSummary').attr('id', 'tmpID');
-                $('#mainDiv').attr('id', 'validationSummary');
-                $('#myModal').modal('hide');
-            }
-            alert("C E ");
-        }
+
     </script>
     </div>
