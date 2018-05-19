@@ -1,0 +1,114 @@
+﻿@model Lecture.Models.Person
+
+
+<div id="validationSummary">
+
+
+
+
+    @using (Ajax.BeginForm(new AjaxOptions
+    {
+        UpdateTargetId = "validationSummary",
+        InsertionMode = InsertionMode.Replace,
+        OnSuccess = "handleSuccess",
+        OnComplete = "onComplete",
+        OnBegin = "OnBegin"
+
+    }))
+    {
+         <input type="text" value="@TempData["success2"]" id="success" />
+
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Person</h4>
+                <hr />
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.RadioButtonFor(model => model.Sex, 0, new { htmlAttributes = new { @class = "form-control" } }) female
+                        @Html.RadioButtonFor(model => model.Sex, 1, new { htmlAttributes = new { @class = "form-control" } }) male
+                        @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BithDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BithDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.BithDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+
+    <script>
+        var OnBegin = function () {
+            return;
+            alert("Beg");
+            if ($('#success').val == "1") {
+                $('#validationSummary').attr('id', 'tmpID');
+                alert("Beg 1");
+                $('#mainDiv').attr('id', 'validationSummary');
+                $('#myModal').modal('hide');
+            }
+            alert("Beg E");
+
+        }
+        function handleSuccess(result) {
+            if (result.redirectTo) {
+                // The controller action returned a JSON object with the redirectTo property
+                // let's redirect to this location:
+                window.location.href = result.redirectTo;
+            } else {
+                // The controller action returned a partial view with the form and the errors
+                // So we need to update some containing DIV with it:
+                $('#validationSummary').html(result);
+            }
+        }
+        var onComplete = function () {
+            return;
+            alert("C ");
+            if ($('#success').val == "1") {
+                alert("C 1");
+                $('#validationSummary').attr('id', 'tmpID');
+                $('#mainDiv').attr('id', 'validationSummary');
+                $('#myModal').modal('hide');
+            }
+            alert("C E ");
+        }
+    </script>
+    </div>
