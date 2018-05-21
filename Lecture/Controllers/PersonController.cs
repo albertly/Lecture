@@ -22,6 +22,8 @@ namespace Lecture.Controllers
         {
             List<Person> list;
 
+            TempData["SearchString"] = search;
+
             if (!String.IsNullOrEmpty(search))
             {
                 list =  _storage.Persons.Where(p => p.FirstName.IndexOf(search) != -1 || p.LastName.IndexOf(search) != -1).ToList<Person>();

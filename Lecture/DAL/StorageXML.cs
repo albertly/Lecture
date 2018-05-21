@@ -58,7 +58,7 @@ namespace Lecture.DAL
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<Person>));
 
-            using (var stream = File.OpenWrite(a_fileName))
+            using (var stream = File.Create(a_fileName))
             {
                 serializer.Serialize(stream, Persons);
             }

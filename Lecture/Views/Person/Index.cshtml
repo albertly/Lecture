@@ -15,6 +15,7 @@
         {
             <input type="text" id="search" name="search" placeholder="Enter Name to search" />
             <button type="submit">Search</button>            
+            @TempData["SearchString"]
         }
         </div>
         <table class="table">
@@ -92,3 +93,8 @@
         </div>
 
     </div>
+
+@section timenow {
+    Current time: @(DateTime.Now.ToString(@"MM\/dd\/yyyy HH:mm"))
+                 
+}
