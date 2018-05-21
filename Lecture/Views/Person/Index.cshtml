@@ -9,49 +9,56 @@
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sex)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BithDate)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
+    <div>
+        
+        @using (Html.BeginForm("Index", "Person", "GET"))
         {
+            <input type="text" id="search" name="search" placeholder="Enter Name to search" />
+            <button type="submit">Search</button>            
+        }
+        </div>
+        <table class="table">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @if (item.Sex == 0)
-                {
-                        <div>female</div>
-                    }
-                    else
-                    {
-                        <div>male</div>
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BithDate)
-                </td>
-                <td>
- 
-                    @Ajax.ActionLink("Edit", "Edit", new { id = item.ID }, new AjaxOptions
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sex)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BithDate)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @if (item.Sex == 0)
+                        {
+                            <div>female</div>
+                        }
+                        else
+                        {
+                            <div>male</div>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BithDate)
+                    </td>
+                    <td>
+
+                        @Ajax.ActionLink("Edit", "Edit", new { id = item.ID }, new AjaxOptions
                {
                    UpdateTargetId = "CustomerList", // <-- DOM element ID to update
                    InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
@@ -59,29 +66,29 @@
                    OnComplete = "$('#myModal').modal('show')"
 
                })
-                    |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                </td>
-            </tr>
-        }
+                        |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+            }
 
-    </table>
+        </table>
 
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div id="CustomerList" class="modal-body">
-                    <p>Some text in the modal.</p>
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div id="CustomerList" class="modal-body">
+                        <p>Some text in the modal.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+
             </div>
-
         </div>
-    </div>
 
-</div>
+    </div>

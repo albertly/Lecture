@@ -17,11 +17,22 @@ namespace Lecture.Controllers
             _storage = storage;
         }
         // GET: Person
-        public ActionResult Index()
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        public ActionResult Index(string search = null)
         {
-           // PersonsStorage init = new PersonsStorage();            
+            List<Person> list;
 
-            return View(_storage.Persons);
+            if (!String.IsNullOrEmpty(search))
+            {
+                list =  _storage.Persons.Where(p => p.FirstName.IndexOf(search) != -1 || p.LastName.IndexOf(search) != -1).ToList<Person>();
+            }
+            else
+            {
+                list = _storage.Persons;
+            }
+           
+
+            return View(list);
         }
 
         // GET: Person/Details/5
