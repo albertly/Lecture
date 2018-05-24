@@ -194,6 +194,7 @@
     <Content Include="Views\Person\Create.cshtml" />
     <Content Include="Views\Person\Edit.cshtml" />
     <Content Include="Views\Person\ValidationSummary.cshtml" />
+    <Content Include="Views\Person\_Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

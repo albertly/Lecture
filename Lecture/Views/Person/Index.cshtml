@@ -10,91 +10,44 @@
         @Html.ActionLink("Create New", "Create")
     </p>
     <div>
-        
-        @using (Html.BeginForm("Index", "Person", "GET"))
+
+        @*        @using (Html.BeginForm("Index", "Person", "GET")) *@
+        @using (Ajax.BeginForm("Index", new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "resultTable"
+        }))
         {
             <input type="text" id="search" name="search" placeholder="Enter Name to search" />
-            <button type="submit">Search</button>            
+            <button type="submit">Search</button>
             @TempData["SearchString"]
         }
-        </div>
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LastName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Sex)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BithDate)
-                </th>
-                <th></th>
-            </tr>
+    </div>
+    <div id="resultTable">
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastName)
-                    </td>
-                    <td>
-                        @if (item.Sex == 0)
-                        {
-                            <div>female</div>
-                        }
-                        else
-                        {
-                            <div>male</div>
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BithDate)
-                    </td>
-                    <td>
-
-                        @Ajax.ActionLink("Edit", "Edit", new { id = item.ID }, new AjaxOptions
-               {
-                   UpdateTargetId = "CustomerList", // <-- DOM element ID to update
-                   InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
-                   HttpMethod = "GET",
-                   OnComplete = "$('#myModal').modal('show')"
-
-               })
-                        |
-                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                    </td>
-                </tr>
-            }
-
-        </table>
-
-        <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div id="CustomerList" class="modal-body">
-                        <p>Some text in the modal.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+        @Html.Partial("_Index", Model)
 
     </div>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div id="CustomerList" class="modal-body">
+                    <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
 
 @section timenow {
     Current time: @(DateTime.Now.ToString(@"MM\/dd\/yyyy HH:mm"))
-                 
+
 }

@@ -24,6 +24,7 @@ namespace Lecture.Controllers
 
             TempData["SearchString"] = search;
 
+            // p=>null ||  p.FirstName.IndexOf(search) != -1 || p.LastName.IndexOf(search) != -1
             if (!String.IsNullOrEmpty(search))
             {
                 list =  _storage.Persons.Where(p => p.FirstName.IndexOf(search) != -1 || p.LastName.IndexOf(search) != -1).ToList<Person>();
@@ -33,7 +34,11 @@ namespace Lecture.Controllers
                 list = _storage.Persons;
             }
            
-
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Index", list);
+            }
+            
             return View(list);
         }
 
