@@ -1,0 +1,26 @@
+﻿@model int
+
+@{
+
+
+    Object htmlAttributesMale;
+    Object htmlAttributesFemale;
+
+    if (Model == 0)
+    {
+        htmlAttributesMale = new { @style = "width:35%", @checked = "checked", @class = "" };
+        htmlAttributesFemale = new { @style = "width:35%", @class = "" };
+    }
+    else
+    {
+        htmlAttributesMale = new { @style = "width:35%", @checked = "checked", @class = "" };
+        htmlAttributesFemale = new { @style = "width:35%", @class = "" };
+    }
+}
+
+
+@Html.RadioButtonFor(Model => Model, 0, htmlAttributesMale) female    
+@Html.RadioButtonFor(Model => Model, 1, htmlAttributesFemale) male
+
+
+

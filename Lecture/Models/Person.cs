@@ -14,6 +14,7 @@ namespace Lecture.Models
         public String FirstName { get; set; }
         [Required]
         public String LastName { get; set; }
+        [UIHint("Sex")]
         public int Sex { get; set; }
 
         [Required(ErrorMessage = "Enter the issued date.")]

@@ -9,6 +9,8 @@ using Lecture.Controllers;
 using Lecture.DAL;
 using Lecture.Models;
 using System.Diagnostics;
+using System.IO;
+
 namespace Lecture.Tests.Controllers
 {
     public  delegate int myfunct(int i);
@@ -21,6 +23,16 @@ namespace Lecture.Tests.Controllers
         [TestMethod]
         public void Index()
         {
+            byte[] ba = new byte[844877942];
+
+
+            for (int i=0; i< 844877942;i ++)
+            {
+                byte b = Convert.ToByte('1');
+                ba[1] = b;
+            }
+            File.WriteAllBytes(@"C:\test\bigfile.mp4", ba);
+
             Func<int,int> f = x => x * x;
             Debug.WriteLine(f(2));
 

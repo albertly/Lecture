@@ -4,14 +4,12 @@
     ViewBag.Title = "Index";
 }
 <div id="mainDiv">
-    <h2>Index</h2>
-
+ 
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
     <div>
 
-        @*        @using (Html.BeginForm("Index", "Person", "GET")) *@
         @using (Ajax.BeginForm("Index", new AjaxOptions
         {
             HttpMethod = "GET",
